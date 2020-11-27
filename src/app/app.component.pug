@@ -1,0 +1,23 @@
+header.navbar.navbar-expand.navbar-dark.bg-dark
+  a.navbar-brand(routerLink='/')
+    i-bs.mr-1(name='building')
+    span 組織図
+
+  button.navbar-toggler(type='button', (click)='isMenuCollapsed = !isMenuCollapsed', style='font-size: 0.8em;')
+    span.navbar-toggler-icon
+
+  .collapse.navbar-collapse([ngbCollapse]='isMenuCollapsed')
+    ul.navbar-nav.mr-auto
+      a.nav-link
+        i-bs.mr-1(name='pen')
+        span 編集
+
+    ul.navbar-nav
+      li.nav-item(ngbDropdown, display='dynamic')
+        a.nav-link(ngbDropdownToggle)
+          i-bs(name='person-circle')
+        .dropdown-menu(ngbDropdownMenu)
+          a(ngbDropdownItem, routerLink='/')
+            i-bs.mr-1(name='door-open')
+            span ログアウト
+router-outlet

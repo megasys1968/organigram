@@ -1,0 +1,47 @@
+splitter-container
+  splitter-secondary
+    ul.nav.flex-column.p-1(style='flex-wrap: nowrap;')
+      li.nav-item(*ngFor='let i of [].constructor(10); let count = index')
+        a.nav-link.px-0(routerLink='/')
+          i-bs.mr-1(name='door-open')
+          span リンク {{ count }}
+
+  splitter-primary
+    .container-fluid
+      .row
+        .col
+          span テストテストテストテストテストテストテストテストテスト
+
+//-
+  //- .sidebar(style='border-right: 1px solid rgba(0, 0, 0, 0.1); background-color: aliceblue;')
+
+  ul.nav.flex-column.sidebar.p-1(style='flex-wrap: nowrap;')
+    //- button.navbar-toggler(type='button', (click)='isSidebarCollapsed = !isSidebarCollapsed')
+    //-   span.navbar-toggler-icon
+
+    //- .collapse.navbar-collapse([ngbCollapse]='isSidebarCollapsed')
+    li.nav-item(*ngFor='let i of [].constructor(20); let count = index')
+      a.nav-link.px-0(routerLink='/')
+        i-bs.mr-1(name='door-open')
+        span リンク {{ count }}
+
+  //- nav.navbar.navbar-expand.flex-column(style='overflow: auto;')
+    ul.navbar-nav
+      li.nav-item(*ngFor='let i of [].constructor(20); let count = index')
+        a.nav-link.px-0(routerLink='/')
+          i-bs.mr-1(name='door-open')
+          span リンク {{count}}
+
+  .container-fluid
+    .row
+      span テストテストテストテストテストテストテストテストテスト
+
+  //-     .col-md3
+  //-       nav
+  //-         a.nav-link.px-0(routerLink='/')
+  //-           i-bs.mr-1(name='door-open')
+  //-           span ログアウト
+
+  //-     main.col-md9
+  //-       .container-fluid
+
