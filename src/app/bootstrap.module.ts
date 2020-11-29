@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { NgbNavModule, NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbCollapseModule, NgbDropdownModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 const modules = [
   NgbCollapseModule,
   NgbDropdownModule,
-  NgbNavModule
+  NgbNavModule,
+  NgbModalModule
 ];
 
 @NgModule({

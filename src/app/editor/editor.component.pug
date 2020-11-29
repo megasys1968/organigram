@@ -1,10 +1,10 @@
 splitter-container
   splitter-secondary
     ul.nav.flex-column.p-1(style='flex-wrap: nowrap;')
-      li.nav-item(*ngFor='let i of [].constructor(10); let count = index')
-        a.nav-link.px-0(routerLink='/')
-          i-bs.mr-1(name='door-open')
-          span リンク {{ count }}
+      li.nav-item
+        button.nav-link.btn.btn-link.shadow-none.px-0((click)='onExcelFileOpen(excelFileOpenTemplate)')
+          i-bs.mr-1(name='file-earmark-excel')
+          span Excelファイルを開く
 
   splitter-primary
     .container-fluid
@@ -12,36 +12,16 @@ splitter-container
         .col
           span テストテストテストテストテストテストテストテストテスト
 
-//-
-  //- .sidebar(style='border-right: 1px solid rgba(0, 0, 0, 0.1); background-color: aliceblue;')
+ng-template(#excelFileOpenTemplate, let-modal)
+  form(#excelFileOpenForm='ngForm')
+    .modal-header.bg-primary.p-1
+      h4.modal-title.text-light Excelファイルを開く
+    .modal-body
+      .custom-file
+        input#excelFileInput.custom-file-input(type='file')
+        label.custom-file-label(for='excelFileInput', data-browse='参照', required) ファイルを選択またはドロップしてください
+        .invalid-feedback(*ngIf='mailTo?.errors?.required') 必須入力です。
 
-  ul.nav.flex-column.sidebar.p-1(style='flex-wrap: nowrap;')
-    //- button.navbar-toggler(type='button', (click)='isSidebarCollapsed = !isSidebarCollapsed')
-    //-   span.navbar-toggler-icon
-
-    //- .collapse.navbar-collapse([ngbCollapse]='isSidebarCollapsed')
-    li.nav-item(*ngFor='let i of [].constructor(20); let count = index')
-      a.nav-link.px-0(routerLink='/')
-        i-bs.mr-1(name='door-open')
-        span リンク {{ count }}
-
-  //- nav.navbar.navbar-expand.flex-column(style='overflow: auto;')
-    ul.navbar-nav
-      li.nav-item(*ngFor='let i of [].constructor(20); let count = index')
-        a.nav-link.px-0(routerLink='/')
-          i-bs.mr-1(name='door-open')
-          span リンク {{count}}
-
-  .container-fluid
-    .row
-      span テストテストテストテストテストテストテストテストテスト
-
-  //-     .col-md3
-  //-       nav
-  //-         a.nav-link.px-0(routerLink='/')
-  //-           i-bs.mr-1(name='door-open')
-  //-           span ログアウト
-
-  //-     main.col-md9
-  //-       .container-fluid
-
+    .modal-footer
+      button.btn.btn-outline-dark.mr-auto(type='button', (click)='modal.close(false)') キャンセル
+      button.btn.btn-outline-dark(type='button', (click)='modal.close(true)', [disabled]='excelFileOpenForm.invalid') 次へ
