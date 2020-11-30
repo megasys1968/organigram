@@ -18,9 +18,9 @@ ng-template(#excelFileOpenTemplate, let-modal)
       h4.modal-title.text-light Excelファイルを開く
     .modal-body
       .custom-file
-        input#excelFileInput.custom-file-input(type='file')
+        input#excelFileInput.custom-file-input(type='file', [(ngModel)]='excelFile', name='excelFile', #excelFileModel='ngModel', observeFiles)
         label.custom-file-label(for='excelFileInput', data-browse='参照', required) ファイルを選択またはドロップしてください
-        .invalid-feedback(*ngIf='mailTo?.errors?.required') 必須入力です。
+        .invalid-feedback(*ngIf='excelFileModel?.errors?.required') 必須入力です。
 
     .modal-footer
       button.btn.btn-outline-dark.mr-auto(type='button', (click)='modal.close(false)') キャンセル

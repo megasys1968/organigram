@@ -9,6 +9,7 @@ import bsCustomFileInput from 'bs-custom-file-input';
 })
 export class EditorComponent implements OnInit {
   public isSidebarCollapsed = true;
+  public excelFile: File | null = null;
 
   constructor(private modalService: NgbModal) { }
 

@@ -1,6 +1,6 @@
 // Import the core angular services.
-import { ControlValueAccessor } from '@angular/forms';
-import { Directive, HostListener } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, FormControl, ValidationErrors, Validator } from '@angular/forms';
+import { Directive, HostListener, Input } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -36,11 +36,14 @@ const noop = () => {
     }
   ]
 })
-export class FileInputValueAccessorDirective implements ControlValueAccessor {
+export class FileInputValueAccessorDirective implements ControlValueAccessor, Validator {
 
   private elementRef: ElementRef;
   private onChangeCallback: (_: any) => void;
   private onTouchedCallback: () => void;
+  private onValidatorChange: () => void;
+  // tslint:disable-next-line: variable-name
+  private _required = false;
 
   // I initialize the file-input value accessor service.
   constructor(elementRef: ElementRef) {
@@ -51,6 +54,30 @@ export class FileInputValueAccessorDirective implements ControlValueAccessor {
     this.onChangeCallback = noop;
     this.onTouchedCallback = noop;
 
+  }
+
+  @Input()
+  get required(): boolean|string {
+    return this._required;
+  }
+
+  set required(value: boolean | string) {
+    this._required = value != null && value !== false && `${value}` !== 'false';
+    if (this.onValidatorChange) { this.onValidatorChange(); }
+  }
+
+  validate(control: AbstractControl): ValidationErrors {
+    if (this._required) {
+      const file = control.value;
+      if (!file) {
+        return { required: true };
+      }
+    }
+    return null;
+  }
+
+  registerOnValidatorChange?(fn: () => void): void {
+    this.onValidatorChange = fn;
   }
 
   @HostListener('blur')
